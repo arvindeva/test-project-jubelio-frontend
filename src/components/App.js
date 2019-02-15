@@ -56,8 +56,9 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    axios.get(`http://localhost:5000/api/items`).then(res => {
+    axios.get(`https://test-project-jubelio-backend.herokuapp.com/api/items`).then(res => {
       if (!res.data.error) {
+        console.log(res.data);
         this.setState({ items: res.data.sort(compare) });
       }
     });
@@ -70,7 +71,7 @@ class App extends React.Component {
   };
 
   deleteItemGrand = item => {
-    axios.delete(`http://localhost:5000/api/items/${item.id}`).then(res => {
+    axios.delete(`https://test-project-jubelio-backend.herokuapp.com/api/items/${item.id}`).then(res => {
       const deleteId = res.data.id;
       const items = this.state.items.slice();
       const newItems = items.filter(
@@ -83,6 +84,8 @@ class App extends React.Component {
   };
 
   updateItemGrand = item => {
+    console.log('trying to update: ', item.id);
+    console.log(item);
     this.setState({
       selectedItemId: item.id,
       name: item.name,
@@ -101,7 +104,7 @@ class App extends React.Component {
     formData.append('price', this.state.price);
     axios
       .put(
-        `http://localhost:5000/api/items/${this.state.selectedItemId}`,
+        `https://test-project-jubelio-backend.herokuapp.com/api/items/${this.state.selectedItemId}`,
         formData,
         {
           headers: {

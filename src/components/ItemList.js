@@ -6,10 +6,12 @@ import Item from './Item';
 const ItemList = props => {
 
   const deleteItem = item => {
+    console.log('deleted ', item.id)
     props.deleteItemGrand(item);
   };
 
   const updateItem = item => {
+    console.log('updated ', item.id)
     props.updateItemGrand(item);
   };
 

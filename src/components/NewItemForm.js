@@ -47,7 +47,7 @@ class NewItemForm extends React.Component {
     formData.append('price', this.state.price);
     formData.append('file', this.state.selectedFile);
     axios
-      .post('http://localhost:5000/api/items', formData, {
+      .post('https://test-project-jubelio-backend.herokuapp.com/api/items', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
