@@ -56,12 +56,13 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    axios.get(`https://test-project-jubelio-backend.herokuapp.com/api/items`).then(res => {
-      if (!res.data.error) {
-        console.log(res.data);
-        this.setState({ items: res.data.sort(compare) });
-      }
-    });
+    axios
+      .get(`https://test-project-jubelio-backend.herokuapp.com/api/items`)
+      .then(res => {
+        if (!res.data.error) {
+          this.setState({ items: res.data.sort(compare) });
+        }
+      });
   }
 
   addItems = item => {
@@ -71,21 +72,25 @@ class App extends React.Component {
   };
 
   deleteItemGrand = item => {
-    axios.delete(`https://test-project-jubelio-backend.herokuapp.com/api/items/${item.id}`).then(res => {
-      const deleteId = res.data.id;
-      const items = this.state.items.slice();
-      const newItems = items.filter(
-        item => item.id.toString() !== deleteId.toString()
-      );
-      this.setState({
-        items: newItems
+    axios
+      .delete(
+        `https://test-project-jubelio-backend.herokuapp.com/api/items/${
+          item.id
+        }`
+      )
+      .then(res => {
+        const deleteId = res.data.id;
+        const items = this.state.items.slice();
+        const newItems = items.filter(
+          item => item.id.toString() !== deleteId.toString()
+        );
+        this.setState({
+          items: newItems
+        });
       });
-    });
   };
 
   updateItemGrand = item => {
-    console.log('trying to update: ', item.id);
-    console.log(item);
     this.setState({
       selectedItemId: item.id,
       name: item.name,
@@ -104,7 +109,9 @@ class App extends React.Component {
     formData.append('price', this.state.price);
     axios
       .put(
-        `https://test-project-jubelio-backend.herokuapp.com/api/items/${this.state.selectedItemId}`,
+        `https://test-project-jubelio-backend.herokuapp.com/api/items/${
+          this.state.selectedItemId
+        }`,
         formData,
         {
           headers: {
